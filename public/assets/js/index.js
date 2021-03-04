@@ -109,7 +109,7 @@ const renderNoteList = function(notes)   {
       const $delBtn = $(
         "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
       );
-      li.append($delBtn);
+      $li.append($delBtn);
     }
     return $li;
   };
