@@ -2,9 +2,6 @@ const util = require("util");
 const fs = require("fs");
 
 
-const util = require("util");
-const fs = require("fs");
-const { timeStamp } = require("console");
 
 const readFileASync = util.promisify(fs.readFile);
 const writeFileASync = util.promisify(fs.writeFile);
