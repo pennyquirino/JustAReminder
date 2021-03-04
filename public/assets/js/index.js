@@ -1,8 +1,8 @@
-const $noteTitle = $(".note-title");
-const $noteText = $(".note-textarea");
-const $saveNoteBtn = $(".save-note");
-const $newNoteBtn = $(".new-note");
-const $noteList = $(".list-container .list-group");
+let noteTitle = $(".note-title");
+let noteText = $(".note-textarea");
+let saveNoteBtn = $(".save-note");
+let newNoteBtn = $(".new-note");
+let noteList = $(".list-container .list-group");
 
 let activeNote = {};
 
@@ -31,26 +31,26 @@ const deleteNote = function(id) {
 
 
 const renderActiveNote = function() {
-  $saveNoteBtn.hide();
+  saveNoteBtn.hide();
 
   if (activeNote.id) {
-    $noteTitle.attr("readonly", true);
-    $noteText.attr("readonly", true);
-    $noteTitle.val(activeNote.title);
-    $noteText.val(activeNote.text);
+    noteTitle.attr("readonly", true);
+    noteText.attr("readonly", true);
+    noteTitle.val(activeNote.title);
+    noteText.val(activeNote.text);
   } else {
-    $noteTitle.attr("readonly", false);
-    $noteText.attr("readonly", false);
-    $noteTitle.val("");
-    $noteText.val("");
+    noteTitle.attr("readonly", false);
+    noteText.attr("readonly", false);
+    noteTitle.val("");
+    noteText.val("");
   }
 };
 
 
 const handleNoteSave = function () {
   const newNote = {
-    title: $noteTitle.val(),
-    text: $noteText.val(),
+    title: noteTitle.val(),
+    text: noteText.val(),
   };
 
   saveNote(newNote).then(function() {
@@ -86,16 +86,16 @@ const handleNewNoteView = function () {
 };
 
 const handleRenderSaveBtn = function () {
-  if (!$noteTitle.val().trim() || !$noteText.val().trim()) {
-    $saveNoteBtn.hide();
+  if (!noteTitle.val().trim() || !noteText.val().trim()) {
+    saveNoteBtn.hide();
   } else {
-    $saveNoteBtn.show();
+    saveNoteBtn.show();
   }
 };
 
 
 const renderNoteList = function(notes)   {
-  $noteList.empty();
+  noteList.empty();
 
   const noteListItems = [];
 
@@ -109,7 +109,7 @@ const renderNoteList = function(notes)   {
       const $delBtn = $(
         "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
       );
-      $li.append($delBtn);
+      li.append($delBtn);
     }
     return $li;
   };
@@ -119,22 +119,22 @@ const renderNoteList = function(notes)   {
   }
 
   notes.forEach(function(note) {
-    const $li = create$li(note.title).data(note);
-    noteListItems.push($li);
+    const li = create$li(note.title).data(note);
+    noteListItems.push(li);
   });
 
-  $noteList.append(noteListItems);
+  noteList.append(noteListItems);
 };
 
 const getAndRenderNotes = function()  {
   return getNotes().then(renderNoteList);
 };
 
-$saveNoteBtn.on("click", handleNoteSave);
-$noteList.on("click", ".list-group-item", handleNoteView);
-$newNoteBtn.on("click", handleNewNoteView);
-$noteList.on("click", ".delete-note", handleNoteDelete);
-$noteTitle.on("keyup", handleRenderSaveBtn);
-$noteText.on("keyup", handleRenderSaveBtn);
+saveNoteBtn.on("click", handleNoteSave);
+noteList.on("click", ".list-group-item", handleNoteView);
+newNoteBtn.on("click", handleNewNoteView);
+noteList.on("click", ".delete-note", handleNoteDelete);
+noteTitle.on("keyup", handleRenderSaveBtn);
+noteText.on("keyup", handleRenderSaveBtn);
 
 getAndRenderNotes();
