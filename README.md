@@ -17,3 +17,4 @@ Application should allow users to delete previously saved notes.
 
 <a href="https://masterp-notetaker.herokuapp.com/">Click here </a> to see the app in action via Heroku
 
+![](Capture.JPG)
